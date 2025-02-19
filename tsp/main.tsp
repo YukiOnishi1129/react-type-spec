@@ -1,58 +1,61 @@
 import "@typespec/http";
+import "@typespec/openapi";
+
+import "./modules/response.tsp";
+import "./modules/features/todo.tsp";
+import "./modules/features/auth.tsp";
 
 using TypeSpec.Http;
 
 @service({
-  title: "Todo Service",
+  title: "API Service",
+  description: "API Service",
 })
-namespace DemoService;
+@TypeSpec.OpenAPI.info({
+  version: "1.0",
+})
+@server("http://localhost:3030", "develop")
+@server("http://localhost:4000", "production")
+@route("/api/v1")
+@tag("API Service")
+namespace TodoAPI {
+  @route("/todos")
+  @tag("Todos")
+  interface Todos {
+    /** List widgets */
+    @get list(): GetResponse<TodoList>;
+    /** Read widgets */
+    @get read(@path id: string): GetResponse<Todo>;
+    /** Create a widget */
+    @post create(@body body: CreateTodoRequest): PostResponse<Todo>;
+    /** Update a widget */
+    @patch update(@path id: string, @body body: UpdateTodoRequest): PutResponse<Todo>;
+    /** Delete a widget */
+    @delete delete(@path id: string): DeleteResponse;
+  }
 
-@error
-model Error {
-  code: int64;
-  message: string;
+  @route("/auth/login")
+  @tag("Login")
+  interface Login {
+    /** Register */
+    @post login(@body body: LoginRequest): PostResponse<Auth>;
+  }
+
+  @route("/auth/signup")
+  @tag("Register")
+  interface Register {
+    /** Register */
+    @post signup(@body body: RegisterRequest): PostResponse<Auth>;
+  }
+
+  @route("/auth/authentication")
+  @tag("Authentication")
+  interface Authentication {
+    /** Authentication */
+    @post authentication(): PostResponse<Auth>;
+  }
 }
 
-@format("uuid")
-scalar uuid extends string;
 
 
-model Todo {
-  id: uuid;
-  userId: uuid;
-  title: string;
-  content?: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
-model TodoList {
-  todos: Todo[];
-  total: int64;
-}
-
-model CreateTodo {
-  title: string;
-  content?: string;
-}
-
-model UpdateTodo {
-  title: string;
-  content?: string;
-}
-
-@route("/todos")
-@tag("Todos")
-interface Todos {
-  /** List widgets */
-  @get list(): TodoList | Error;
-  /** Read widgets */
-  @get read(@path id: string): Todo | Error;
-  /** Create a widget */
-  @post create(@body body: CreateTodo): Todo | Error;
-  /** Update a widget */
-  @patch update(@path id: string, @body body: UpdateTodo): Todo | Error;
-  /** Delete a widget */
-  @delete delete(@path id: string): void | Error;
-
-}

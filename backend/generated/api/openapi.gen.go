@@ -4,11 +4,19 @@
 package api
 
 import (
+	"time"
+
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-// CreateTodo defines model for CreateTodo.
-type CreateTodo struct {
+// Auth defines model for Auth.
+type Auth struct {
+	Token string `json:"token"`
+	User  User   `json:"user"`
+}
+
+// CreateTodoRequest defines model for CreateTodoRequest.
+type CreateTodoRequest struct {
 	Content *string `json:"content,omitempty"`
 	Title   string  `json:"title"`
 }
@@ -19,14 +27,27 @@ type Error struct {
 	Message string `json:"message"`
 }
 
+// LoginRequest defines model for LoginRequest.
+type LoginRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
+// RegisterRequest defines model for RegisterRequest.
+type RegisterRequest struct {
+	Email    string `json:"email"`
+	Name     string `json:"name"`
+	Password string `json:"password"`
+}
+
 // Todo defines model for Todo.
 type Todo struct {
-	Content   *string `json:"content,omitempty"`
-	CreatedAt string  `json:"createdAt"`
-	Id        Uuid    `json:"id"`
-	Title     string  `json:"title"`
-	UpdatedAt string  `json:"updatedAt"`
-	UserId    Uuid    `json:"userId"`
+	Content   *string   `json:"content,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
+	Id        Uuid      `json:"id"`
+	Title     string    `json:"title"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	UserId    Uuid      `json:"userId"`
 }
 
 // TodoList defines model for TodoList.
@@ -35,17 +56,32 @@ type TodoList struct {
 	Total int64  `json:"total"`
 }
 
-// UpdateTodo defines model for UpdateTodo.
-type UpdateTodo struct {
+// UpdateTodoRequest defines model for UpdateTodoRequest.
+type UpdateTodoRequest struct {
 	Content *string `json:"content,omitempty"`
 	Title   *string `json:"title,omitempty"`
+}
+
+// User defines model for User.
+type User struct {
+	CreatedAt time.Time `json:"createdAt"`
+	Email     string    `json:"email"`
+	Id        Uuid      `json:"id"`
+	Name      string    `json:"name"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // Uuid defines model for uuid.
 type Uuid = openapi_types.UUID
 
+// LoginLoginJSONRequestBody defines body for LoginLogin for application/json ContentType.
+type LoginLoginJSONRequestBody = LoginRequest
+
+// RegisterSignupJSONRequestBody defines body for RegisterSignup for application/json ContentType.
+type RegisterSignupJSONRequestBody = RegisterRequest
+
 // TodosCreateJSONRequestBody defines body for TodosCreate for application/json ContentType.
-type TodosCreateJSONRequestBody = CreateTodo
+type TodosCreateJSONRequestBody = CreateTodoRequest
 
 // TodosUpdateJSONRequestBody defines body for TodosUpdate for application/json ContentType.
-type TodosUpdateJSONRequestBody = UpdateTodo
+type TodosUpdateJSONRequestBody = UpdateTodoRequest

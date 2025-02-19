@@ -1,0 +1,21 @@
+services:
+  prism:
+    build: .
+    ports:
+      - "3030:3030"
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    environment:
+      - SWAGGER_JSON=/openapi/openapi.yml
+    volumes:
+      - ./tsp-output/schema/openapi.yaml:/openapi/openapi.yml
+    ports:
+      - "3031:8080"
+  redoc:
+    image: redocly/redoc
+    environment:
+      - SPEC_URL=/openapi/openapi.yml
+    volumes:
+      - ./tsp-output/schema/openapi.yaml:/usr/share/nginx/html/openapi/openapi.yml
+    ports:
+      - "3032:80"
