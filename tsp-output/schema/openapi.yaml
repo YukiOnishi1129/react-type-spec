@@ -448,6 +448,14 @@ components:
           $ref: '#/components/schemas/User'
         token:
           type: string
+      example:
+        user:
+          id: user-1
+          name: User1
+          email: user1@test.com
+          createdAt: '2020-01-01T00:00:00Z'
+          updatedAt: '2020-01-01T00:00:00Z'
+        token: xxxxx
     BaseModel:
       type: object
       required:
@@ -520,6 +528,13 @@ components:
           type: string
       allOf:
         - $ref: '#/components/schemas/BaseModel'
+      example:
+        id: todo-1
+        userId: user-1
+        title: Todo 1
+        content: Todo Content 1
+        createdAt: '2020-01-01T00:00:00Z'
+        updatedAt: '2020-01-01T00:00:00Z'
     TodoList:
       type: object
       required:
@@ -533,6 +548,21 @@ components:
         total:
           type: integer
           format: int64
+      example:
+        todos:
+          - id: todo-1
+            userId: user-1
+            title: Todo 1
+            content: Todo Content 1
+            createdAt: '2020-01-01T00:00:00Z'
+            updatedAt: '2020-01-01T00:00:00Z'
+          - id: todo-2
+            userId: user-1
+            title: Todo 2
+            content: Todo Content 2
+            createdAt: '2020-01-01T00:00:00Z'
+            updatedAt: '2020-01-01T00:00:00Z'
+        total: 2
     UpdateTodoRequest:
       type: object
       properties:
@@ -552,6 +582,12 @@ components:
           type: string
       allOf:
         - $ref: '#/components/schemas/BaseModel'
+      example:
+        id: user-1
+        name: User1
+        email: user1@test.com
+        createdAt: '2020-01-01T00:00:00Z'
+        updatedAt: '2020-01-01T00:00:00Z'
     uuid:
       type: string
       format: uuid
