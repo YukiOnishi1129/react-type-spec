@@ -8,15 +8,16 @@ import "./modules/features/auth.tsp";
 using TypeSpec.Http;
 
 @service({
-  title: "Todo Service",
+  title: "API Service",
+  description: "API Service",
 })
 @TypeSpec.OpenAPI.info({
   version: "1.0",
 })
-@server("http://localhost:3030/api/v1", "develop")
-@server("http://localhost:4000/api/v1", "production")
+@server("http://localhost:3030", "develop")
+@server("http://localhost:4000", "production")
 @route("/api/v1")
-@tag("Todo Service")
+@tag("API Service")
 namespace TodoAPI {
   @route("/todos")
   @tag("Todos")
