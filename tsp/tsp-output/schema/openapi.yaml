@@ -3,12 +3,13 @@ info:
   title: Todo Service
   version: '1.0'
 tags:
+  - name: Todo Service
   - name: Todos
   - name: Login
   - name: Register
   - name: Authentication
 paths:
-  /auth/authentication:
+  /api/v1/auth/authentication:
     post:
       operationId: Authentication_authentication
       description: Authentication
@@ -56,8 +57,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Authentication
-  /auth/login:
+  /api/v1/auth/login:
     post:
       operationId: Login_login
       description: Register
@@ -105,6 +107,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Login
       requestBody:
         required: true
@@ -112,7 +115,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/LoginRequest'
-  /auth/signup:
+  /api/v1/auth/signup:
     post:
       operationId: Register_signup
       description: Register
@@ -160,6 +163,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Register
       requestBody:
         required: true
@@ -167,7 +171,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RegisterRequest'
-  /todos:
+  /api/v1/todos:
     get:
       operationId: Todos_list
       description: List widgets
@@ -215,6 +219,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Todos
     post:
       operationId: Todos_create
@@ -263,6 +268,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Todos
       requestBody:
         required: true
@@ -270,7 +276,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateTodoRequest'
-  /todos/{id}:
+  /api/v1/todos/{id}:
     get:
       operationId: Todos_read
       description: Read widgets
@@ -323,6 +329,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Todos
     patch:
       operationId: Todos_update
@@ -376,6 +383,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Todos
       requestBody:
         required: true
@@ -435,6 +443,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
       tags:
+        - Todo Service
         - Todos
 components:
   schemas:
@@ -448,6 +457,29 @@ components:
           $ref: '#/components/schemas/User'
         token:
           type: string
+      example:
+        user:
+          id: user-1
+          name: User1
+          email: user1@test.com
+          createdAt: '2020-01-01T00:00:00Z'
+          updatedAt: '2020-01-01T00:00:00Z'
+        token: xxxxx
+    BaseModel:
+      type: object
+      required:
+        - id
+        - createdAt
+        - updatedAt
+      properties:
+        id:
+          $ref: '#/components/schemas/uuid'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
     CreateTodoRequest:
       type: object
       required:
@@ -494,24 +526,24 @@ components:
     Todo:
       type: object
       required:
-        - id
         - userId
         - title
-        - createdAt
-        - updatedAt
       properties:
-        id:
-          $ref: '#/components/schemas/uuid'
         userId:
           $ref: '#/components/schemas/uuid'
         title:
           type: string
         content:
           type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+      example:
+        id: todo-1
+        userId: user-1
+        title: Todo 1
+        content: Todo Content 1
+        createdAt: '2020-01-01T00:00:00Z'
+        updatedAt: '2020-01-01T00:00:00Z'
     TodoList:
       type: object
       required:
@@ -525,6 +557,21 @@ components:
         total:
           type: integer
           format: int64
+      example:
+        todos:
+          - id: todo-1
+            userId: user-1
+            title: Todo 1
+            content: Todo Content 1
+            createdAt: '2020-01-01T00:00:00Z'
+            updatedAt: '2020-01-01T00:00:00Z'
+          - id: todo-2
+            userId: user-1
+            title: Todo 2
+            content: Todo Content 2
+            createdAt: '2020-01-01T00:00:00Z'
+            updatedAt: '2020-01-01T00:00:00Z'
+        total: 2
     UpdateTodoRequest:
       type: object
       properties:
@@ -535,26 +582,28 @@ components:
     User:
       type: object
       required:
-        - id
         - name
         - email
-        - createdAt
-        - updatedAt
       properties:
-        id:
-          $ref: '#/components/schemas/uuid'
         name:
           type: string
         email:
           type: string
-        createdAt:
-          type: string
-        updatedAt:
-          type: string
+      allOf:
+        - $ref: '#/components/schemas/BaseModel'
+      example:
+        id: user-1
+        name: User1
+        email: user1@test.com
+        createdAt: '2020-01-01T00:00:00Z'
+        updatedAt: '2020-01-01T00:00:00Z'
     uuid:
       type: string
       format: uuid
 servers:
   - url: http://localhost:4000/api/v1
     description: production
+    variables: {}
+  - url: http://localhost:3030/api/v1
+    description: develop
     variables: {}

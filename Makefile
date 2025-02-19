@@ -14,7 +14,7 @@ db-sh:
 
 # environment
 gen-open-api:
-	tsp compile ./tsp
+	tsp compile ./tsp --output-dir=tsp/tsp-output
 
 gen-go-api:
 	oapi-codegen -config ./backend/openapi.config.yml ./tsp/tsp-output/schema/openapi.yaml
