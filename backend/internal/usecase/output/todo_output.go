@@ -7,10 +7,7 @@ import (
 
 type TodoOutput = api.Todo
 
-type TodoListOutput struct {
-	Todos []TodoOutput `json:"todos"`
-	Total int64        `json:"total"`
-}
+type TodoListOutput api.TodoList
 
 func NewTodoOutput(todo *dto.TodoOutput) *TodoOutput {
 	return &TodoOutput{
