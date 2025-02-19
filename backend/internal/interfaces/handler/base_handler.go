@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/YukiOnishi1129/react-type-spec/backend/generated/api"
 	apperrors "github.com/YukiOnishi1129/react-type-spec/backend/internal/pkg/errors"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -15,11 +16,7 @@ import (
 type BaseHandler struct{}
 
 
-type ErrorResponse struct {
-	Code    string `json:"code"`
-	Message string `json:"message"`
-}
-
+type ErrorResponse = api.Error
 
 type contextKey string
 
@@ -46,6 +43,7 @@ func (h *BaseHandler) respondJSON(w http.ResponseWriter, status int, payload int
 // エラーレスポンスを返す共通メソッド
 func (h *BaseHandler) respondError(w http.ResponseWriter, err error) {
 	var status int
+	
 	var response ErrorResponse
 
 	// アプリケーションのエラー型の場合
@@ -54,6 +52,7 @@ func (h *BaseHandler) respondError(w http.ResponseWriter, err error) {
 		switch appErr.Type {
 		case apperrors.NotFound:
 			status = http.StatusNotFound
+
 		case apperrors.ValidationError:
 			status = http.StatusBadRequest
 		case apperrors.PermissionDenied:

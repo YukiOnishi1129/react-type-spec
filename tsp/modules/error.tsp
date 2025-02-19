@@ -5,6 +5,6 @@ using TypeSpec.Http;
 
 @error
 model Error {
-  code: int64;
+  code: string;
   message: string;
 }

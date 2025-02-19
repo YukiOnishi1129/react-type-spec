@@ -52,7 +52,7 @@ func (h *todoHandler) ListTodo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	output, err := h.todoUseCase.ListTodo(ctx, &input.ListTodoInput{UserID: user.ID})
+	output, err := h.todoUseCase.ListTodo(ctx, &input.ListTodoInput{UserID: user.Id})
 	if err != nil {
 		h.respondError(w, err)
 		return
@@ -79,7 +79,7 @@ func (h *todoHandler) GetTodo(w http.ResponseWriter, r *http.Request) {
 
 	input := &input.GetTodoInput{
 		ID:     todoID,
-		UserID: user.ID,
+		UserID: user.Id,
 	}
 
 	if err := input.Validate(); err != nil {
@@ -111,7 +111,7 @@ func (h *todoHandler) CreateTodo(w http.ResponseWriter, r *http.Request) {
 		h.respondError(w, apperrors.NewValidationError("invalid request body", err))
 		return
 	}
-	input.UserID = user.ID
+	input.UserID = user.Id
 
 	if err := input.Validate(); err != nil {
 		h.respondError(w, apperrors.NewValidationError("validation failed", err))
@@ -149,7 +149,7 @@ func (h *todoHandler) UpdateTodo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	input.ID = todoID
-	input.UserID = user.ID
+	input.UserID = user.Id
 
 	if err := input.Validate(); err != nil {
 		h.respondError(w, apperrors.NewValidationError("validation failed", err))
@@ -183,7 +183,7 @@ func (h *todoHandler) DeleteTodo(w http.ResponseWriter, r *http.Request) {
 
 	input := &input.DeleteTodoInput{
 		ID:     todoID,
-		UserID: user.ID,
+		UserID: user.Id,
 	}
 
 	if err := input.Validate(); err != nil {

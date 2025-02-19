@@ -1,7 +1,6 @@
 package output
 
-type AuthOutput struct {
-	Token string `json:"token"`
-	User  UserOutput `json:"user"`
-}
+import "github.com/YukiOnishi1129/react-type-spec/backend/generated/api"
+
+type AuthOutput = api.Auth
 

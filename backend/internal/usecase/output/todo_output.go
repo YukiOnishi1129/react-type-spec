@@ -1,19 +1,11 @@
 package output
 
 import (
-	"time"
-
+	"github.com/YukiOnishi1129/react-type-spec/backend/generated/api"
 	"github.com/YukiOnishi1129/react-type-spec/backend/internal/infrastructure/persistence/dto"
-	"github.com/google/uuid"
 )
 
-type TodoOutput struct {
-	ID        uuid.UUID  `json:"id"`
-	Title     string     `json:"title"`
-	Content   *string    `json:"content"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"updated_at"`
-}
+type TodoOutput = api.Todo
 
 type TodoListOutput struct {
 	Todos []TodoOutput `json:"todos"`
@@ -22,7 +14,7 @@ type TodoListOutput struct {
 
 func NewTodoOutput(todo *dto.TodoOutput) *TodoOutput {
 	return &TodoOutput{
-		ID:        todo.ID,
+		Id:        todo.ID,
 		Title:     todo.Title,
 		Content:   todo.Content,
 		CreatedAt: todo.CreatedAt,
