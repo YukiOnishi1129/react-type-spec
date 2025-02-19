@@ -4,6 +4,8 @@
 package api
 
 import (
+	"time"
+
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
@@ -40,12 +42,12 @@ type RegisterRequest struct {
 
 // Todo defines model for Todo.
 type Todo struct {
-	Content   *string `json:"content,omitempty"`
-	CreatedAt string  `json:"createdAt"`
-	Id        Uuid    `json:"id"`
-	Title     string  `json:"title"`
-	UpdatedAt string  `json:"updatedAt"`
-	UserId    Uuid    `json:"userId"`
+	Content   *string   `json:"content,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
+	Id        Uuid      `json:"id"`
+	Title     string    `json:"title"`
+	UpdatedAt time.Time `json:"updatedAt"`
+	UserId    Uuid      `json:"userId"`
 }
 
 // TodoList defines model for TodoList.
@@ -62,11 +64,11 @@ type UpdateTodoRequest struct {
 
 // User defines model for User.
 type User struct {
-	CreatedAt string `json:"createdAt"`
-	Email     string `json:"email"`
-	Id        Uuid   `json:"id"`
-	Name      string `json:"name"`
-	UpdatedAt string `json:"updatedAt"`
+	CreatedAt time.Time `json:"createdAt"`
+	Email     string    `json:"email"`
+	Id        Uuid      `json:"id"`
+	Name      string    `json:"name"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 // Uuid defines model for uuid.
