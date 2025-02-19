@@ -1,10 +1,12 @@
 import "@typespec/http";
 import "@typespec/openapi";
 
-import "./response.tsp";
+import "../response.tsp";
+import "../scalar.tsp";
+
 import "./user.tsp";
 
-import "./scalar.tsp";
+
 
 using TypeSpec.Http;
 

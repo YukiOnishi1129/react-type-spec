@@ -1,21 +1,18 @@
 import "@typespec/http";
 import "@typespec/openapi";
 
-import "./response.tsp";
-
-import "./scalar.tsp";
+import "../response.tsp";
+import "../scalar.tsp";
+import "../base.tsp";
 
 using TypeSpec.Http;
 
 
 
-model Todo {
-	id: uuid;
+model Todo extends BaseModel {
 	userId: uuid;
 	title: string;
 	content?: string;
-	createdAt: string;
-	updatedAt: string;
 }
   
 model TodoList {

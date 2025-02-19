@@ -2,8 +2,8 @@ import "@typespec/http";
 import "@typespec/openapi";
 
 import "./modules/response.tsp";
-import "./modules/todo.tsp";
-import "./modules/auth.tsp";
+import "./modules/features/todo.tsp";
+import "./modules/features/auth.tsp";
 
 using TypeSpec.Http;
 

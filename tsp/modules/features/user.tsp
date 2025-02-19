@@ -1,15 +1,13 @@
 import "@typespec/http";
 import "@typespec/openapi";
 
-import "./scalar.tsp";
+import "../scalar.tsp";
+import "../base.tsp";
 
 using TypeSpec.Http;
 
 
-model User {
-	id: uuid;
+model User extends BaseModel {
 	name: string;
 	email: string;
-	createdAt: string;
-	updatedAt: string;
 }
