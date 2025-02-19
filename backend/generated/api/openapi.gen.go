@@ -9,6 +9,10 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
+const (
+	BearerAuthScopes = "BearerAuth.Scopes"
+)
+
 // Auth defines model for Auth.
 type Auth struct {
 	Token string `json:"token"`
@@ -23,7 +27,7 @@ type CreateTodoRequest struct {
 
 // Error defines model for Error.
 type Error struct {
-	Code    int64  `json:"code"`
+	Code    string `json:"code"`
 	Message string `json:"message"`
 }
 
@@ -59,7 +63,7 @@ type TodoList struct {
 // UpdateTodoRequest defines model for UpdateTodoRequest.
 type UpdateTodoRequest struct {
 	Content *string `json:"content,omitempty"`
-	Title   *string `json:"title,omitempty"`
+	Title   string  `json:"title"`
 }
 
 // User defines model for User.

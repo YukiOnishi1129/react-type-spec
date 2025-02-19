@@ -7,11 +7,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NAVIGATION_PATH } from "../../../constants/navigation";
-import { TodoType } from "../../../types/Todo";
+import { Todo } from "../../../apis/generated/api";
 import styles from "./style.module.css";
 
 type TodoListProps = {
-  todoList: Array<TodoType>;
+  todoList: Array<Todo>;
   onDeleteTodo: (id: string, title: string) => void;
 };
 

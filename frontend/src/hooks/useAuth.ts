@@ -7,16 +7,16 @@ import {
   removeAxiosAuthentication,
 } from "../apis/globalAxios";
 import { checkAuthentication } from "../apis/auth";
-import { UserType } from "../types/User";
+import { User } from "../apis/generated/api";
 
 export const useAuth = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [user, setUser] = useState<UserType | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isAuth, setIsAuth] = useState<boolean>(false);
 
   const signIn = useCallback(
-    (user: UserType, token: string) => {
+    (user: User, token: string) => {
       setUser(user);
       setIsAuth(true);
       setAxiosAuthentication(token);

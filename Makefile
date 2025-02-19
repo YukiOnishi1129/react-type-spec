@@ -16,5 +16,8 @@ db-sh:
 gen-open-api:
 	tsp compile ./tsp --output-dir=tsp/tsp-output
 
+gen-front-api:
+	npx @openapitools/openapi-generator-cli generate -i ./tsp/tsp-output/schema/openapi.yaml -g typescript-axios -o ./frontend/src/apis/generated
+
 gen-go-api:
 	oapi-codegen -config ./backend/openapi.config.yml ./tsp/tsp-output/schema/openapi.yaml

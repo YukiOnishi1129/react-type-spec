@@ -1,16 +1,16 @@
 import { ReactNode, createContext, FC } from "react";
 
 import { useAuth } from "../hooks/useAuth";
-import { UserType } from "../types/User";
+import { User } from "../apis/generated/api";
 
 type AuthContextProps = {
   children: ReactNode;
 };
 
 type AuthContextType = {
-  user: UserType | null;
+  user: User | null;
   isAuth: boolean;
-  signIn: (user: UserType, token: string) => void;
+  signIn: (user: User, token: string) => void;
   signOut: () => void;
 };
 

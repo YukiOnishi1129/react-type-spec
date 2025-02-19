@@ -31,7 +31,7 @@ export const useTodoEditTemplate = () => {
 
   const fetchTodo = useCallback(async () => {
     if (!id) return;
-    const response = await getTodo({ id });
+    const response = await getTodo(id);
     if (!response.data) return;
     setValue("title", response.data.title);
     setValue("content", response.data.content);
@@ -41,8 +41,7 @@ export const useTodoEditTemplate = () => {
     useCallback(
       async (values: z.infer<typeof schema>) => {
         if (!id) return;
-        await updateTodo({
-          id,
+        await updateTodo(id, {
           title: values.title,
           content: values.content,
         });
