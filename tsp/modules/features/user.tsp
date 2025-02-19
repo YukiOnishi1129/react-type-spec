@@ -2,7 +2,6 @@ import "@typespec/http";
 import "@typespec/openapi";
 
 import "../scalar.tsp";
-import "../base.tsp";
 
 using TypeSpec.Http;
 
@@ -13,7 +12,10 @@ using TypeSpec.Http;
 	createdAt: utcDateTime.fromISO("2020-01-01T00:00:00Z"),
 	updatedAt: utcDateTime.fromISO("2020-01-01T00:00:00Z")
   })
-model User extends BaseModel {
+model User {
+	id: uuid;
 	name: string;
 	email: string;
+	createdAt: utcDateTime;
+	updatedAt: utcDateTime;
 }

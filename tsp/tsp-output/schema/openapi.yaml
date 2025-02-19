@@ -460,21 +460,6 @@ components:
           createdAt: '2020-01-01T00:00:00Z'
           updatedAt: '2020-01-01T00:00:00Z'
         token: xxxxx
-    BaseModel:
-      type: object
-      required:
-        - id
-        - createdAt
-        - updatedAt
-      properties:
-        id:
-          $ref: '#/components/schemas/uuid'
-        createdAt:
-          type: string
-          format: date-time
-        updatedAt:
-          type: string
-          format: date-time
     CreateTodoRequest:
       type: object
       required:
@@ -521,17 +506,26 @@ components:
     Todo:
       type: object
       required:
+        - id
         - userId
         - title
+        - createdAt
+        - updatedAt
       properties:
+        id:
+          $ref: '#/components/schemas/uuid'
         userId:
           $ref: '#/components/schemas/uuid'
         title:
           type: string
         content:
           type: string
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       example:
         id: todo-1
         userId: user-1
@@ -577,15 +571,24 @@ components:
     User:
       type: object
       required:
+        - id
         - name
         - email
+        - createdAt
+        - updatedAt
       properties:
+        id:
+          $ref: '#/components/schemas/uuid'
         name:
           type: string
         email:
           type: string
-      allOf:
-        - $ref: '#/components/schemas/BaseModel'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
       example:
         id: user-1
         name: User1

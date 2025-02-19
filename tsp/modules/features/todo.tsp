@@ -3,7 +3,6 @@ import "@typespec/openapi";
 
 import "../response.tsp";
 import "../scalar.tsp";
-import "../base.tsp";
 
 using TypeSpec.Http;
 
@@ -16,10 +15,13 @@ using TypeSpec.Http;
 	createdAt: utcDateTime.fromISO("2020-01-01T00:00:00Z"),
 	updatedAt: utcDateTime.fromISO("2020-01-01T00:00:00Z")
   })
-model Todo extends BaseModel {
+model Todo {
+	id: uuid;
 	userId: uuid;
 	title: string;
 	content?: string;
+	createdAt: utcDateTime;
+	updatedAt: utcDateTime;
 }
   
 @example(#{

@@ -6,8 +6,6 @@ import "../scalar.tsp";
 
 import "./user.tsp";
 
-
-
 using TypeSpec.Http;
 
 const userExample: User = #{
