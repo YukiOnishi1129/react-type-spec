@@ -5,8 +5,6 @@ import "./error.tsp";
 
 using TypeSpec.Http;
 
-namespace Response;
-
 model SuccessResponse<T> {
 	@statusCode status: 200;
 	@body body: {
@@ -30,29 +28,29 @@ model SuccessNoContentResponse {
 
 model BadRequestErrorResponse {
 	@statusCode status: 400;
-	@body body: global.Error
+	@body body: Error
 }
 
 model UnauthorizedErrorResponse {
 	@statusCode status: 401;
-	@body body: global.Error
+	@body body: Error
 }
   
 
 model ForbiddenErrorResponse {
 	@statusCode status: 403;
-	@body body: global.Error
+	@body body: Error
 }
 
 
 model NotFoundErrorResponse {
 	@statusCode status: 404;
-	@body body: global.Error
+	@body body: Error
 }
 
 model InternalServerErrorResponse {
 	@statusCode status: 500;
-	@body body: global.Error
+	@body body: Error
 }
 
 

@@ -20,15 +20,15 @@ namespace TodoAPI;
 @tag("Todos")
 interface Todos {
 	/** List widgets */
-	@get list(): global.Response.GetResponse<global.Todo.TodoList>;
+	@get list(): GetResponse<TodoList>;
 	/** Read widgets */
-	@get read(@path id: string): global.Response.GetResponse<global.Todo.Todo>;
+	@get read(@path id: string): GetResponse<Todo>;
 	/** Create a widget */
-	@post create(@body body: global.Todo.CreateTodoRequest):global.Response.PostResponse<global.Todo.Todo>;
+	@post create(@body body: CreateTodoRequest): PostResponse<Todo>;
 	/** Update a widget */
-	@patch update(@path id: string, @body body: global.Todo.UpdateTodoRequest): global.Response.PutResponse<global.Todo.Todo>;
+	@patch update(@path id: string, @body body: UpdateTodoRequest): PutResponse<Todo>;
 	/** Delete a widget */
-	@delete delete(@path id: string): global.Response.DeleteResponse;
+	@delete delete(@path id: string): DeleteResponse;
 }
 
 
@@ -36,14 +36,14 @@ interface Todos {
 @tag("Login")
 interface Login {
 	/** Register */
-	@post login(@body body: global.Auth.LoginRequest): global.Response.PostResponse<global.Auth.Auth>;
+	@post login(@body body: LoginRequest): PostResponse<Auth>;
 }
 
 @route("/auth/signup")
 @tag("Register")
 interface Register {
 	/** Register */
-	@post signup(@body body: global.Auth.RegisterRequest): global.Response.PostResponse<global.Auth.Auth>;
+	@post signup(@body body: RegisterRequest): PostResponse<Auth>;
 
 }
 
@@ -51,50 +51,6 @@ interface Register {
 @tag("Authentication")
 interface Authentication {
 	/** Authentication */
-	@post authentication(): global.Response.PostResponse<global.Auth.Auth>;
+	@post authentication(): PostResponse<Auth>;
 }
 
-
-// @format("uuid")
-// scalar uuid extends string;
-
-
-// model Todo {
-//   id: uuid;
-//   userId: uuid;
-//   title: string;
-//   content?: string;
-//   createdAt: string;
-//   updatedAt: string;
-// }
-
-// model TodoList {
-//   todos: Todo[];
-//   total: int64;
-// }
-
-// model CreateTodoRequest {
-//   title: string;
-//   content?: string;
-// }
-
-// model UpdateTodoRequest {
-//   title: string;
-//   content?: string;
-// }
-
-// @route("/todos")
-// @tag("Todos")
-// interface Todos {
-//   /** List widgets */
-//   @get list(): global.Response.GetResponse<TodoList>;
-//   /** Read widgets */
-//   @get read(@path id: string): global.Response.GetResponse<Todo>;
-//   /** Create a widget */
-//   @post create(@body body: CreateTodoRequest):global.Response.PostResponse<Todo>;
-//   /** Update a widget */
-//   @patch update(@path id: string, @body body: UpdateTodoRequest): global.Response.PutResponse<Todo>;
-//   /** Delete a widget */
-//   @delete delete(@path id: string): global.Response.DeleteResponse;
-
-// }
