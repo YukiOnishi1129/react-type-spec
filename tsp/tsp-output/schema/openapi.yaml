@@ -407,11 +407,6 @@ paths:
             application/json:
               schema:
                 type: object
-                properties:
-                  message:
-                    type: string
-                required:
-                  - message
         '400':
           description: The server could not understand the request due to invalid syntax.
           content:
