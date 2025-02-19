@@ -7,79 +7,79 @@ import (
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
-// AuthAuth defines model for Auth.Auth.
-type AuthAuth struct {
-	Token string   `json:"token"`
-	User  UserUser `json:"user"`
+// Auth defines model for Auth.
+type Auth struct {
+	Token string `json:"token"`
+	User  User   `json:"user"`
 }
 
-// AuthLoginRequest defines model for Auth.LoginRequest.
-type AuthLoginRequest struct {
+// CreateTodoRequest defines model for CreateTodoRequest.
+type CreateTodoRequest struct {
+	Content *string `json:"content,omitempty"`
+	Title   string  `json:"title"`
+}
+
+// Error defines model for Error.
+type Error struct {
+	Code    int64  `json:"code"`
+	Message string `json:"message"`
+}
+
+// LoginRequest defines model for LoginRequest.
+type LoginRequest struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
 
-// AuthRegisterRequest defines model for Auth.RegisterRequest.
-type AuthRegisterRequest struct {
+// RegisterRequest defines model for RegisterRequest.
+type RegisterRequest struct {
 	Email    string `json:"email"`
 	Name     string `json:"name"`
 	Password string `json:"password"`
 }
 
-// ErrorError defines model for Error.Error.
-type ErrorError struct {
-	Code    int64  `json:"code"`
-	Message string `json:"message"`
+// Todo defines model for Todo.
+type Todo struct {
+	Content   *string `json:"content,omitempty"`
+	CreatedAt string  `json:"createdAt"`
+	Id        Uuid    `json:"id"`
+	Title     string  `json:"title"`
+	UpdatedAt string  `json:"updatedAt"`
+	UserId    Uuid    `json:"userId"`
 }
 
-// ScalarTypesUuid defines model for ScalarTypes.uuid.
-type ScalarTypesUuid = openapi_types.UUID
-
-// TodoCreateTodoRequest defines model for Todo.CreateTodoRequest.
-type TodoCreateTodoRequest struct {
-	Content *string `json:"content,omitempty"`
-	Title   string  `json:"title"`
+// TodoList defines model for TodoList.
+type TodoList struct {
+	Todos []Todo `json:"todos"`
+	Total int64  `json:"total"`
 }
 
-// TodoTodo defines model for Todo.Todo.
-type TodoTodo struct {
-	Content   *string         `json:"content,omitempty"`
-	CreatedAt string          `json:"createdAt"`
-	Id        ScalarTypesUuid `json:"id"`
-	Title     string          `json:"title"`
-	UpdatedAt string          `json:"updatedAt"`
-	UserId    ScalarTypesUuid `json:"userId"`
-}
-
-// TodoTodoList defines model for Todo.TodoList.
-type TodoTodoList struct {
-	Todos []TodoTodo `json:"todos"`
-	Total int64      `json:"total"`
-}
-
-// TodoUpdateTodoRequest defines model for Todo.UpdateTodoRequest.
-type TodoUpdateTodoRequest struct {
+// UpdateTodoRequest defines model for UpdateTodoRequest.
+type UpdateTodoRequest struct {
 	Content *string `json:"content,omitempty"`
 	Title   *string `json:"title,omitempty"`
 }
 
-// UserUser defines model for User.User.
-type UserUser struct {
-	CreatedAt string          `json:"createdAt"`
-	Email     string          `json:"email"`
-	Id        ScalarTypesUuid `json:"id"`
-	Name      string          `json:"name"`
-	UpdatedAt string          `json:"updatedAt"`
+// User defines model for User.
+type User struct {
+	CreatedAt string `json:"createdAt"`
+	Email     string `json:"email"`
+	Id        Uuid   `json:"id"`
+	Name      string `json:"name"`
+	UpdatedAt string `json:"updatedAt"`
 }
 
+// Uuid defines model for uuid.
+type Uuid = openapi_types.UUID
+
 // LoginLoginJSONRequestBody defines body for LoginLogin for application/json ContentType.
-type LoginLoginJSONRequestBody = AuthLoginRequest
+type LoginLoginJSONRequestBody = LoginRequest
 
 // RegisterSignupJSONRequestBody defines body for RegisterSignup for application/json ContentType.
-type RegisterSignupJSONRequestBody = AuthRegisterRequest
+type RegisterSignupJSONRequestBody = RegisterRequest
 
 // TodosCreateJSONRequestBody defines body for TodosCreate for application/json ContentType.
-type TodosCreateJSONRequestBody = TodoCreateTodoRequest
+type TodosCreateJSONRequestBody = CreateTodoRequest
 
 // TodosUpdateJSONRequestBody defines body for TodosUpdate for application/json ContentType.
-type TodosUpdateJSONRequestBody = TodoUpdateTodoRequest
+type TodosUpdateJSONRequestBody = UpdateTodoRequest
