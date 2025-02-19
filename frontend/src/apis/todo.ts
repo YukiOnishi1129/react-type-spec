@@ -1,20 +1,14 @@
-import globalAxios, { isAxiosError } from "./globalAxios";
-import {
-  TodoListType,
-  TodoType,
-  GetTodoRequest,
-  CreateTodoRequest,
-  UpdateTodoRequest,
-  DeleteTodoRequest,
-} from "../types/Todo";
+import { isAxiosError, todoApi } from "./globalAxios";
+import { CreateTodoRequest, UpdateTodoRequest } from "./generated/api";
 import { IErrorResponse, ResponseType } from "../types/ApiResponse";
 
 export const getTodos = async () => {
   try {
-    const response = await globalAxios.get<TodoListType>("/todos");
-    const res: ResponseType<TodoListType> = {
+    const response = await todoApi.todosList();
+
+    const res = {
       code: response.status,
-      data: response.data,
+      data: response.data.todos,
     };
     return res;
   } catch (error) {
@@ -31,10 +25,10 @@ export const getTodos = async () => {
   }
 };
 
-export const getTodo = async (request: GetTodoRequest) => {
+export const getTodo = async (id: string) => {
   try {
-    const response = await globalAxios.get<TodoType>(`/todos/${request.id}`);
-    const res: ResponseType<TodoType> = {
+    const response = await todoApi.todosRead(id);
+    const res = {
       code: response.status,
       data: response.data,
     };
@@ -55,8 +49,8 @@ export const getTodo = async (request: GetTodoRequest) => {
 
 export const createTodo = async (request: CreateTodoRequest) => {
   try {
-    const response = await globalAxios.post<TodoType>("/todos", request);
-    const res: ResponseType<TodoType> = {
+    const response = await todoApi.todosCreate(request);
+    const res = {
       code: response.status,
       data: response.data,
     };
@@ -75,13 +69,10 @@ export const createTodo = async (request: CreateTodoRequest) => {
   }
 };
 
-export const updateTodo = async (request: UpdateTodoRequest) => {
+export const updateTodo = async (id: string, request: UpdateTodoRequest) => {
   try {
-    const response = await globalAxios.put<TodoType>(`/todos/${request.id}`, {
-      title: request.title,
-      content: request.content,
-    });
-    const res: ResponseType<TodoType> = {
+    const response = await todoApi.todosUpdate(id, request);
+    const res = {
       code: response.status,
       data: response.data,
     };
@@ -100,9 +91,9 @@ export const updateTodo = async (request: UpdateTodoRequest) => {
   }
 };
 
-export const deleteTodo = async (request: DeleteTodoRequest) => {
+export const deleteTodo = async (id: string) => {
   try {
-    await globalAxios.delete(`/todos/${request.id}`);
+    await todoApi.todosDelete(id);
   } catch (error) {
     const res: ResponseType = {
       code: 500,

@@ -18,6 +18,7 @@ using TypeSpec.Http;
 @server("http://localhost:4000", "production")
 @route("/api/v1")
 @tag("API Service")
+@useAuth(BearerAuth)
 namespace TodoAPI {
   @route("/todos")
   @tag("Todos")
@@ -29,7 +30,7 @@ namespace TodoAPI {
     /** Create a widget */
     @post create(@body body: CreateTodoRequest): PostResponse<Todo>;
     /** Update a widget */
-    @patch update(@path id: string, @body body: UpdateTodoRequest): PutResponse<Todo>;
+    @put update(@path id: string, @body body: UpdateTodoRequest): PutResponse<Todo>;
     /** Delete a widget */
     @delete delete(@path id: string): DeleteResponse;
   }

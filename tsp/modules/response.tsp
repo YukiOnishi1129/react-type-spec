@@ -7,16 +7,12 @@ using TypeSpec.Http;
 
 model SuccessResponse<T> {
 	@statusCode status: 200;
-	@body body: {
-	  data: T
-	};
+	@body body: T
 }
 
 model SuccessCreatedResponse<T> {
 	@statusCode status: 201;
-	@body body: {
-	  data: T
-	};
+	@body body: T
 }
 
 model SuccessNoContentResponse {

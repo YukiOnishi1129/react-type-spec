@@ -4,14 +4,14 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { getTodos, deleteTodo } from "../../../apis/todo";
-import { TodoType } from "../../../types/Todo";
+import { Todo } from "../../../apis/generated/api";
 
 const schema = z.object({
   keyword: z.string(),
 });
 
 export const useTodoListTemplate = () => {
-  const [todoList, setTodoList] = useState<Array<TodoType>>([]);
+  const [todoList, setTodoList] = useState<Array<Todo>>([]);
 
   const { control, watch } = useForm({
     resolver: zodResolver(schema),
@@ -35,12 +35,12 @@ export const useTodoListTemplate = () => {
   const fetchTodoList = useCallback(async () => {
     const response = await getTodos();
     if (!response?.data) return;
-    setTodoList(response.data.todos);
+    setTodoList(response.data);
   }, []);
 
   const handleDeleteTodo = useCallback((id: string, title: string) => {
     if (window.confirm(`「${title}」のtodoを削除しますか？`)) {
-      deleteTodo({ id });
+      deleteTodo(id);
       setTodoList((prev) => prev.filter((todo) => todo.id !== id));
     }
   }, []);

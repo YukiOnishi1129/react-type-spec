@@ -42,14 +42,14 @@ export const useLoginTemplate = () => {
         }
         const { email, password } = values;
         const res = await login(email, password);
-        if (res.code !== 200 || !res.data) {
+        if (!res.data) {
           setError("email", {
             type: "manual",
-            message: res.message,
+            message: res.message || "エラーが発生しました",
           });
           return;
         }
-        signIn(res.data?.user, res.data?.token);
+        signIn(res.data.user, res.data.token);
       },
       [signIn, setError]
     )

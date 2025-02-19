@@ -1,15 +1,19 @@
-import globalAxios, { isAxiosError } from "./globalAxios";
+import {
+  isAxiosError,
+  loginApi,
+  registerApi,
+  authenticationApi,
+} from "./globalAxios";
 
-import { AuthType } from "../types/User";
 import { IErrorResponse, ResponseType } from "../types/ApiResponse";
 
 export const login = async (email: string, password: string) => {
   try {
-    const response = await globalAxios.post<AuthType>("/auth/login", {
+    const response = await loginApi.loginLogin({
       email,
       password,
     });
-    const res: ResponseType<AuthType> = {
+    const res = {
       code: response.status,
       data: response.data,
     };
@@ -18,6 +22,7 @@ export const login = async (email: string, password: string) => {
   } catch (error) {
     const res: ResponseType = {
       code: 500,
+      data: undefined,
       message: error as string,
     };
     if (isAxiosError(error)) {
@@ -35,12 +40,13 @@ export const register = async (
   password: string
 ) => {
   try {
-    const response = await globalAxios.post<AuthType>("/auth/signup", {
+    const response = await registerApi.registerSignup({
       name,
       email,
       password,
     });
-    const res: ResponseType<AuthType> = {
+
+    const res = {
       code: response.status,
       data: response.data,
     };
@@ -61,8 +67,8 @@ export const register = async (
 
 export const checkAuthentication = async () => {
   try {
-    const response = await globalAxios.post<AuthType>("/auth/authentication");
-    const res: ResponseType<AuthType> = {
+    const response = await authenticationApi.authenticationAuthentication();
+    const res = {
       code: response.status,
       data: response.data,
     };

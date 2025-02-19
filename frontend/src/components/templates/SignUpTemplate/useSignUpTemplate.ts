@@ -44,10 +44,10 @@ export const useSignUpTemplate = () => {
         }
         const { name, email, password } = values;
         const res = await register(name, email, password);
-        if (res.code !== 201 || !res.data) {
+        if (!res.data) {
           setError("name", {
             type: "manual",
-            message: res.message,
+            message: res.message || "エラーが発生しました",
           });
           return;
         }
